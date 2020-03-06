@@ -29,6 +29,9 @@
     <None Update="Configurations\Autofac.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Configurations\CompanyMappings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="FeedProducts\capterra.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

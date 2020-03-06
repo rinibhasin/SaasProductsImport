@@ -1,0 +1,10 @@
+{
+  "Mappings": {
+    "Capterra": {
+      "Parser": "Yaml"
+    },
+    "SoftwareAdvice": {
+      "Parser": "Json"
+    }
+  }
+}

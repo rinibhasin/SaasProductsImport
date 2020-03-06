@@ -1,23 +1,27 @@
-﻿using ProductsImport.Infrastructure.Services.Parsers;
+﻿using ProductsImport.Infrastructure.Services;
+using ProductsImport.Infrastructure.Services.Parsers;
 using ProductsImport.Models;
-using System.IO;
-using System.Reflection;
+using System.Collections.Generic;
 
 namespace ProductsImport.Infrastructure.DataProviders
 {
     public class Capterra : IDataProvider
     {
-        public IParser parser { get; set; }
+        public IParser Parser { get; set; }
+
+        public FileHelper Helper { get; set; }
         public Capterra()
         {
-            this.parser = new YamlParser();
+            this.Parser = new YamlParser();
+            this.Helper = new FileHelper();
         }
 
-        public void ParseInput()
+        public ProductsObject ParseInput()
         {
-            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), Constants.FeedProducts, Constants.Capterra);
-            string inputString = File.ReadAllText(path);
-            var products = parser.Parse<ProductsObject>(inputString);
+            return new ProductsObject()
+            {
+                Products = Parser.Parse<List<Product>>(this.Helper.ReadFileText(Constants.Capterra))
+            };
         }
     }
 }

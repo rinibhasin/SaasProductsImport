@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Text;
 
 namespace ProductsImport.Infrastructure.Services
 {
     public class FileHelper
     {
-        public string ReadFile()
+        public String ReadFileText(string fileName)
         {
-            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), Constants.FeedProducts, Constants.SoftwareAdvice);
+            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), Constants.FeedProducts, fileName);
             return File.ReadAllText(path);
         }
     }

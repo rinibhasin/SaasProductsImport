@@ -39,6 +39,53 @@
         }
       ],
       "instanceScope": "single-instance"
+    },
+    {
+      "type": "ProductsImport.Infrastructure.Services.Parsers.InputParser, ProductsImport",
+      "services": [
+        {
+          "type": "ProductsImport.Infrastructure.Services.Parsers.IInputParser, ProductsImport"
+        }
+      ],
+      "instanceScope": "single-instance"
+    },
+    {
+      "type": "ProductsImport.Engine, ProductsImport",
+      "services": [
+        {
+          "type": "ProductsImport.IEngine, ProductsImport"
+        }
+      ],
+      "instanceScope": "single-instance"
+    },
+    {
+      "type": "ProductsImport.Infrastructure.Services.ConsoleLogger, ProductsImport",
+      "services": [
+        {
+          "type": "ProductsImport.Infrastructure.Services.IConsoleLogger, ProductsImport"
+        }
+      ],
+      "instanceScope": "single-instance"
+    },
+    {
+      "type": "ProductsImport.Infrastructure.DataAccess.MongoDbDataAccess, ProductsImport",
+      "services": [
+        {
+          "type": "ProductsImport.Infrastructure.DataAccess.IDataAccess, ProductsImport",
+          "key": "mongoDB"
+        }
+      ],
+      "instanceScope": "single-instance"
+    },
+    {
+      "type": "ProductsImport.Infrastructure.DataAccess.MySqlDataAccess, ProductsImport",
+      "services": [
+        {
+          "type": "ProductsImport.Infrastructure.DataAccess.IDataAccess, ProductsImport",
+          "key": "mysql"
+        }
+      ],
+      "instanceScope": "single-instance"
     }
   ]
 }
