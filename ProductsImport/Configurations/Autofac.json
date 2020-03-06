@@ -1,0 +1,44 @@
+{
+  "components": [
+    {
+      "type": "ProductsImport.Infrastructure.Services.Parsers.JsonParser, ProductsImport",
+      "services": [
+        {
+          "type": "ProductsImport.Infrastructure.Services.Parsers.IParser, ProductsImport",
+          "key": "json"
+        }
+      ],
+      "instanceScope": "single-instance"
+    },
+    {
+      "type": "ProductsImport.Infrastructure.Services.Parsers.YamlParser, ProductsImport",
+      "services": [
+        {
+          "type": "ProductsImport.Infrastructure.Services.Parsers.IParser, ProductsImport",
+          "key": "yaml"
+        }
+      ],
+      "instanceScope": "single-instance"
+    },
+    {
+      "type": "ProductsImport.Infrastructure.DataProviders.Capterra, ProductsImport",
+      "services": [
+        {
+          "type": "ProductsImport.Infrastructure.DataProviders.IDataProvider, ProductsImport",
+          "key": "capterra"
+        }
+      ],
+      "instanceScope": "single-instance"
+    },
+    {
+      "type": "ProductsImport.Infrastructure.DataProviders.SoftwareAdvice, ProductsImport",
+      "services": [
+        {
+          "type": "ProductsImport.Infrastructure.DataProviders.IDataProvider, ProductsImport",
+          "key": "softwareadvice"
+        }
+      ],
+      "instanceScope": "single-instance"
+    }
+  ]
+}
