@@ -8,19 +8,19 @@ namespace ProductsImport.Infrastructure.DataProviders
     public class Capterra : IDataProvider
     {
         public IParser Parser { get; set; }
+        public IFileHelper FileHelper { get; set; }
 
-        public FileHelper Helper { get; set; }
-        public Capterra()
+        public Capterra(IFileHelper fileHelper)
         {
-            this.Parser = new YamlParser();
-            this.Helper = new FileHelper();
+            this.Parser = Ioc.ResolveKeyed<IParser>("yaml");
+            this.FileHelper = fileHelper;
         }
 
         public ProductsObject ParseInput()
         {
             return new ProductsObject()
             {
-                Products = Parser.Parse<List<Product>>(this.Helper.ReadFileText(Constants.Capterra))
+                Products = Parser.Parse<List<Product>>(this.FileHelper.ReadFileText(Constants.Capterra))
             };
         }
     }

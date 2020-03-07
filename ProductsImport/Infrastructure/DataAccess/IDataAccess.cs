@@ -4,6 +4,6 @@ namespace ProductsImport.Infrastructure.DataAccess
 {
     public interface IDataAccess
     {
-        void InsertProducts(ProductsObject products);
+        int InsertProducts(ProductsObject products);
     }
 }

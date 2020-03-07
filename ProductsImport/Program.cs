@@ -1,11 +1,10 @@
-﻿namespace ProductsImport
-{
-    using Autofac;
-    using Autofac.Configuration;
-    using Microsoft.Extensions.Configuration;
-    using ProductsImport.Models.Configurations;
-    using System;
+﻿using Autofac;
+using Microsoft.Extensions.Configuration;
+using ProductsImport.Infrastructure.Services;
+using System;
 
+namespace ProductsImport
+{
     class Program
     {
         static void Main(string[] args)
@@ -14,7 +13,7 @@
 
             /** Engine does all the work **/
             var engine = container.Resolve<IEngine>();
-            engine.Process(container);
+            engine.Process();
             
             Console.ReadLine();
 
@@ -29,11 +28,10 @@
                             .AddJsonFile("appSettings.json", optional: false, reloadOnChange: true);
 
             IConfigurationRoot configuration = configurationBuilder.Build();
-            var module = new ConfigurationModule(configuration);
-            var builder = new ContainerBuilder();
-            builder.RegisterModule(module);
-            AppSettings settings = new AppSettings();
-            return builder.Build();
-        }
+
+            Ioc.BuildContainer(configuration);
+
+            return Ioc.Container;
+        }       
     }
 }

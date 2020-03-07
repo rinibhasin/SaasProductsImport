@@ -4,9 +4,10 @@ namespace ProductsImport.Infrastructure.DataAccess
 {
     public class MongoDbDataAccess : IDataAccess
     {
-        public void InsertProducts(ProductsObject products)
+        public int InsertProducts(ProductsObject products)
         {
-            // TODO
+            // Mongo Db specific code for pushing the products into the database
+            return products.Products.Count;
         }
     }
 }

@@ -6,17 +6,17 @@ namespace ProductsImport.Infrastructure.DataProviders
 {
     public class SoftwareAdvice : IDataProvider
     {
-        public IParser parser { get; set; }
-        public FileHelper Helper { get; set; }
-        public SoftwareAdvice()
+        public IParser Parser { get; set; }
+        public IFileHelper FileHelper { get; set; }
+        public SoftwareAdvice(IFileHelper Helper, IParser parser)
         {
-            this.parser = new JsonParser();
-            this.Helper = Helper;
+            this.Parser = Ioc.ResolveKeyed<IParser>("json");
+            this.FileHelper = Helper;
         }
 
         public ProductsObject ParseInput()
         {
-            return parser.Parse<ProductsObject>(this.Helper.ReadFileText(Constants.Capterra));
+            return Parser.Parse<ProductsObject>(this.FileHelper.ReadFileText(Constants.Capterra));
         }
     }
 }

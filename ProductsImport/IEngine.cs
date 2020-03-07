@@ -1,9 +1,7 @@
-﻿using Autofac;
-
-namespace ProductsImport
+﻿namespace ProductsImport
 {
     public interface IEngine
     {
-        void Process(IContainer container);
+        void Process();
     }
 }
