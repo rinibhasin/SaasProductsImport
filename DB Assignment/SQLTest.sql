@@ -68,7 +68,7 @@ GROUP BY DATE_YEAR;
 -- Please return at least: first_name, last_name, listing_names --
 SELECT u.id AS UserId, u.first_name, u.last_name, GROUP_CONCAT(l.name) AS listing_names
 FROM users u
-INNER JOIN test.listings l
+INNER JOIN listings l
 ON u.id = l.user_id
 WHERE u.status = 2
 GROUP BY UserId
