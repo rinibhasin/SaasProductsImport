@@ -1,7 +1,9 @@
-﻿namespace ProductsImport
+﻿using ProductsImport.Models.Configurations;
+
+namespace ProductsImport
 {
     public interface IEngine
     {
-        void Process();
+        void Process(AppSettings settings);
     }
 }

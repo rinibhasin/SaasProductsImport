@@ -2,6 +2,8 @@
 using ProductsImport.Infrastructure.DataProviders;
 using ProductsImport.Infrastructure.Services;
 using ProductsImport.Infrastructure.Services.Parsers;
+using ProductsImport.Models.Configurations;
+using System;
 
 namespace ProductsImport
 {
@@ -19,18 +21,29 @@ namespace ProductsImport
             InputParser = inputParser;
         }
 
-        public void Process()
+        public void Process(AppSettings settings)
         {
-            var inputString = "import capterra feed-products/capterra.yaml";
-            var inputModel = InputParser.Parse(inputString);
+            try
+            {
+                var inputString = "import softwareadvice feed-products/capterra.yaml";
+                var inputModel = InputParser.Parse(inputString);
 
-            var provider = Ioc.ResolveKeyed<IDataProvider>(inputModel.CompanyName);
-            var products = provider.ParseInput();
+                /* Getting provider either capterra or 
+                  software advice from input model and creating its
+                  respective object*/
+                var provider = Ioc.Container.ResolveKeyed<IDataProvider>(inputModel.CompanyName);
+                var products = provider.ParseInput();
 
-            DataAccess = Ioc.ResolveKeyed<IDataAccess>("mysql");
-            DataAccess.InsertProducts(products);
+                /* Inserting products into the database*/
+                DataAccess = Ioc.Container.ResolveKeyed<IDataAccess>(settings.Database);
+                DataAccess.InsertProducts(products);
 
-            ConsoleLogger.DisplayProducts(products);
+                ConsoleLogger.DisplayProducts(products);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

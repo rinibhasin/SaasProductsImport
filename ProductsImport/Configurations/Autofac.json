@@ -95,6 +95,15 @@
         }
       ],
       "instanceScope": "single-instance"
+    },
+    {
+      "type": "ProductsImport.Models.Configurations.AppSettings, ProductsImport",
+      "services": [
+        {
+          "type": "ProductsImport.Models.Configurations.AppSettings, ProductsImport"
+        }
+      ],
+      "instanceScope": "single-instance"
     }
   ]
 }

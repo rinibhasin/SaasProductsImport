@@ -8,15 +8,15 @@ namespace ProductsImport.Infrastructure.DataProviders
     {
         public IParser Parser { get; set; }
         public IFileHelper FileHelper { get; set; }
-        public SoftwareAdvice(IFileHelper Helper, IParser parser)
+        public SoftwareAdvice(IFileHelper fileHelper)
         {
-            this.Parser = Ioc.ResolveKeyed<IParser>("json");
-            this.FileHelper = Helper;
+            this.Parser = Ioc.Container.ResolveKeyed<IParser>("json");
+            this.FileHelper = fileHelper;
         }
 
         public ProductsObject ParseInput()
         {
-            return Parser.Parse<ProductsObject>(this.FileHelper.ReadFileText(Constants.Capterra));
+            return Parser.Parse<ProductsObject>(this.FileHelper.ReadFileText(Constants.SoftwareAdvice));
         }
     }
 }

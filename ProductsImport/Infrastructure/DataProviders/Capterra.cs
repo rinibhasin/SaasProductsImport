@@ -12,7 +12,7 @@ namespace ProductsImport.Infrastructure.DataProviders
 
         public Capterra(IFileHelper fileHelper)
         {
-            this.Parser = Ioc.ResolveKeyed<IParser>("yaml");
+            this.Parser = Ioc.Container.ResolveKeyed<IParser>("yaml");
             this.FileHelper = fileHelper;
         }
 

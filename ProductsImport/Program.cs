@@ -1,6 +1,6 @@
-﻿using Autofac;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using ProductsImport.Infrastructure.Services;
+using ProductsImport.Models.Configurations;
 using System;
 
 namespace ProductsImport
@@ -9,18 +9,18 @@ namespace ProductsImport
     {
         static void Main(string[] args)
         {
-            var container = SetApplicationConfiguration();
+            var settings = GetAppSettings();
 
             /** Engine does all the work **/
-            var engine = container.Resolve<IEngine>();
-            engine.Process();
+            var engine = Ioc.Container.Resolve<IEngine>();
+            engine.Process(settings);
             
             Console.ReadLine();
 
         }
 
         // This method is setting the application configuration, returning the container
-        private static IContainer SetApplicationConfiguration()
+        private static AppSettings GetAppSettings()
         {
             var configurationBuilder = new ConfigurationBuilder()
                             .SetBasePath(Settings.ConfigPath)
@@ -30,8 +30,9 @@ namespace ProductsImport
             IConfigurationRoot configuration = configurationBuilder.Build();
 
             Ioc.BuildContainer(configuration);
-
-            return Ioc.Container;
+            var settings = new AppSettings();
+            configuration.Bind(settings);
+            return settings;
         }       
     }
 }
